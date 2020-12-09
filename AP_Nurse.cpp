@@ -17,6 +17,8 @@ AP_Nurse::AP_Nurse(){
     //I2C init
     Wire.begin();
 
+    bme.begin();
+
     //get program start time
     //this -> ap_node.lastEcheck = millis();
     //Wire.pins(I2C_SDA, I2C_SCL);
@@ -100,32 +102,25 @@ status_t AP_Nurse::checkMotion(){
 
 status_t AP_Nurse::checkBme() {
     int ret = STATUS_OK;
-    if ((this -> ap_node.lastTemperature = 0/*bme.readTemperature()*/) <= this -> ap_th.tempTH) {
+    if ((this -> ap_node.lastTemperature = bme.readTemperature()) <= this -> ap_th.tempTH) {
         ret |= TEMPERATURE_ALERT;
         this -> ap_node.lastAlert |= TEMPERATURE_ALERT;
     } else {
         this -> ap_node.lastAlert &= (0xff - TEMPERATURE_ALERT);
     }
-    //this -> ap_node.lastHumidity = bme.readHumidity();
-    //this -> ap_node.lastAPressure = bme.readPressure();
+    this -> ap_node.lastHumidity = bme.readHumidity();
+    this -> ap_node.lastAPressure = bme.readPressure();
 
     return (status_t)ret;
 }
 
 status_t AP_Nurse::checkGas() {
     int ret = STATUS_OK;
-    if (analogRead(GAS_PIN) >= this -> ap_th.gasTH) {
+    if (bme.readGas() >= this -> ap_th.gasTH) {
         ret |= GAS_ALERT;
-        this -> ap_node.lastAlert |= GAS_ALERT;
+        this -> ap_node.lastAlert |= GAS_ALERT|SMOKE_ALERT;
     } else {
-        this -> ap_node.lastAlert &= (0xff - GAS_ALERT);
-    }
-
-    if (analogRead(SMOKE_PIN) >= this -> ap_th.smokeTH) {
-        ret |= SMOKE_ALERT;
-        this -> ap_node.lastAlert |= SMOKE_ALERT;
-    } else {
-        this -> ap_node.lastAlert &= (0xff - SMOKE_ALERT);
+        this -> ap_node.lastAlert &= (0xff - (GAS_ALERT|SMOKE_ALERT));
     }
 
     return (status_t)ret;

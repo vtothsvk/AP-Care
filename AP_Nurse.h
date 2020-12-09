@@ -8,6 +8,7 @@
 #include "AP_Nurse_config.h"
 #include "Sensor_enable.h"
 #include "PCF8591.h"
+#include <Adafruit_BME680.h>
 
 class AP_Nurse{
 public:
@@ -37,6 +38,8 @@ protected:
     void checkTimer();
     void disableTimer();
     void timerISR(void *pArg);
+
+    Adafruit_BME680 bme;
 
     ap_node_t ap_node;
     ap_threshold_t ap_th;

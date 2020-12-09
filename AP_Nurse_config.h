@@ -8,8 +8,8 @@
  *  @note select only one
  */
 //#define BED
-#define DOOR
-//#define HALLWAY
+//#define DOOR
+#define HALLWAY
 //#define KITCHEN
 
 /** Threshold and sensor enable directives 
