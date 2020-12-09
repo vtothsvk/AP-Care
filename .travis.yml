@@ -19,4 +19,4 @@ install:
   #- git clone https://github.com/squix78/esp8266-oled-ssd1306 /usr/local/share/arduino/libraries/esp8266-oled-ssd1306
   
 script:
-  - arduino --verify --board esp32:esp32:ESP32_DEV:xtal=240,FlashFreq=40,FlashMode=dio,baud=115200,eesz=512K64,ResetMethod=ck,dbg=Disabled,lvl=None____ AP-Care.ino
+  - arduino --verify --board esp32:esp32:esp32:xtal=240,FlashFreq=40,FlashMode=dio,baud=115200,eesz=512K64,ResetMethod=ck,dbg=Disabled,lvl=None____ AP-Care.ino
