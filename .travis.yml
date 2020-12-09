@@ -11,7 +11,7 @@ install:
   - ln -s $PWD /usr/local/share/arduino/libraries/
   - arduino --pref "boardsmanager.additional.urls=https://dl.espressif.com/dl/package_esp32_index.json" --save-prefs
   - arduino --install-boards esp32:esp32 --save-prefs
-  - wget -q https://github.com/adafruit/Adafruit_BME680/archive/2.1.2.tar.gz -O - | tar xvfz - -C ~/Arduino/libraries/
+  - wget -q https://github.com/adafruit/Adafruit_BME680/archive/1.1.1.tar.gz -O - | tar xvfz - -C ~/Arduino/libraries/
   #- wget -q https://github.com/adafruit/Adafruit_Sensor/archive/1.1.4.tar.gz -O - | tar xvfz - -C ~/Arduino/libraries/
   
   # install lib
