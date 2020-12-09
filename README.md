@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/vtothsvk/AP-Care.svg?branch=develop)](https://travis-ci.com/vtothsvk/AP-Home)
 
-Custom FW of the AP-Nurse Home node based on the ESP8266 Arduino core. 
+Custom FW of the AP-Nurse Care node based on the ESP32 Arduino core. 
 
 ## Files
 
