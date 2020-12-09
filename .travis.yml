@@ -9,14 +9,14 @@ before_install:
   - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
 install:
   - ln -s $PWD /usr/local/share/arduino/libraries/
-  - arduino --pref "boardsmanager.additional.urls=http://arduino.esp8266.com/stable/package_esp8266com_index.json" --save-prefs
-  - arduino --install-boards esp8266:esp8266 --save-prefs
-  - wget -q https://github.com/adafruit/Adafruit_BME280_Library/archive/2.1.2.tar.gz -O - | tar xvfz - -C ~/Arduino/libraries/
-  - wget -q https://github.com/adafruit/Adafruit_Sensor/archive/1.1.4.tar.gz -O - | tar xvfz - -C ~/Arduino/libraries/
+  - arduino --pref "boardsmanager.additional.urls=https://dl.espressif.com/dl/package_esp32_index.json" --save-prefs
+  - arduino --install-boards esp32:esp32 --save-prefs
+  - wget -q https://github.com/adafruit/Adafruit_BME680_Library/archive/2.1.2.tar.gz -O - | tar xvfz - -C ~/Arduino/libraries/
+  #- wget -q https://github.com/adafruit/Adafruit_Sensor/archive/1.1.4.tar.gz -O - | tar xvfz - -C ~/Arduino/libraries/
   
   # install lib
   # add your libs here, example:
   #- git clone https://github.com/squix78/esp8266-oled-ssd1306 /usr/local/share/arduino/libraries/esp8266-oled-ssd1306
   
 script:
-  - arduino --verify --board esp8266:esp8266:generic:xtal=80,FlashFreq=40,FlashMode=dio,baud=115200,eesz=512K64,ResetMethod=ck,dbg=Disabled,lvl=None____ AP-Home.ino
+  - arduino --verify --board esp32:esp32:generic:xtal=240,FlashFreq=40,FlashMode=dio,baud=115200,eesz=512K64,ResetMethod=ck,dbg=Disabled,lvl=None____ AP-Care.ino
