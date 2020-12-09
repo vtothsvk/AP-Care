@@ -17,7 +17,9 @@ AP_Nurse::AP_Nurse(){
     //I2C init
     Wire.begin();
 
+    #ifdef BME_ENABLE
     bme.begin();
+    #endif
 
     //get program start time
     //this -> ap_node.lastEcheck = millis();
