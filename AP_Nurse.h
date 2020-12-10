@@ -9,6 +9,7 @@
 #include "Sensor_enable.h"
 #include "PCF8591.h"
 #include <Adafruit_BME680.h>
+#include <VL53L0X.h>
 
 class AP_Nurse{
 public:
@@ -40,6 +41,7 @@ protected:
     void timerISR(void *pArg);
 
     Adafruit_BME680 bme;
+    VL53L0X tof;
 
     ap_node_t ap_node;
     ap_threshold_t ap_th;
