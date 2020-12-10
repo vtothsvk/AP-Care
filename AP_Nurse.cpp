@@ -138,7 +138,7 @@ status_t AP_Nurse::checkBme() {
 
 status_t AP_Nurse::checkGas() {
     int ret = STATUS_OK;
-    this -> ap_node.lastGas = this -> ap_node.lastSmoke = bme.readGas()
+    this -> ap_node.lastGas = this -> ap_node.lastSmoke = bme.readGas();
     if ((this -> ap_node.lastGas) >= this -> ap_th.gasTH) {
         ret |= GAS_ALERT;
         this -> ap_node.lastAlert |= GAS_ALERT|SMOKE_ALERT;
@@ -163,7 +163,7 @@ status_t AP_Nurse::checkLight() {
 
 status_t AP_Nurse::checkFSR() {
     int ret = STATUS_OK;
-    if ((this -> ap_node.lastPressure analogRead(FSR_PIN)) >= this -> ap_th.pressureTH) {
+    if ((this -> ap_node.lastPressure = analogRead(FSR_PIN)) >= this -> ap_th.pressureTH) {
         ret |= PRESSURE_ALERT;
         this -> ap_node.lastAlert |= PRESSURE_ALERT;
     } else {
