@@ -21,6 +21,16 @@ AP_Nurse::AP_Nurse(){
     bme.begin();
     #endif
 
+    #ifdef DOOR
+    tof.setTimeout(500);
+    if (!tof.init())
+    {
+        Serial.println("Failed to detect and initialize ToF sensor!");
+        while (1) {}
+    }
+    tof.startContinuous(100);
+    #endif
+
     //get program start time
     //this -> ap_node.lastEcheck = millis();
     //Wire.pins(I2C_SDA, I2C_SCL);
@@ -83,7 +93,17 @@ void AP_Nurse::printData(){
 }
 
 status_t AP_Nurse::checkMotion(){
+    #ifndef DOOR
     this -> ap_node.lastMotion = digitalRead(PIR_PIN);
+    #endif
+
+    #ifdef DOOR
+    if (tof.readRangeContinuousMillimeters() < 8000) {
+        this -> ap_node.lastMotion = true;
+    } else {
+        this -> ap_node.lastMotion = false;
+    }
+    #endif
     if(this -> ap_node.lastMotion){
         this -> ap_node.lastAlert |= MOTION_ALERT;
         #ifdef DOOR
@@ -118,7 +138,8 @@ status_t AP_Nurse::checkBme() {
 
 status_t AP_Nurse::checkGas() {
     int ret = STATUS_OK;
-    if (bme.readGas() >= this -> ap_th.gasTH) {
+    this -> ap_node.lastGas = this -> ap_node.lastSmoke = bme.readGas()
+    if ((this -> ap_node.lastGas) >= this -> ap_th.gasTH) {
         ret |= GAS_ALERT;
         this -> ap_node.lastAlert |= GAS_ALERT|SMOKE_ALERT;
     } else {
@@ -130,7 +151,7 @@ status_t AP_Nurse::checkGas() {
 
 status_t AP_Nurse::checkLight() {
     int ret = STATUS_OK;
-    if (analogRead(LIGHT_PIN) >= this -> ap_th.lightTH) {
+    if ((this -> ap_node.lastLight = analogRead(LIGHT_PIN)) >= this -> ap_th.lightTH) {
         ret |= LIGHT_ALERT;
         this -> ap_node.lastAlert |= LIGHT_ALERT;
     } else {
@@ -142,7 +163,7 @@ status_t AP_Nurse::checkLight() {
 
 status_t AP_Nurse::checkFSR() {
     int ret = STATUS_OK;
-    if (analogRead(FSR_PIN) >= this -> ap_th.pressureTH) {
+    if ((this -> ap_node.lastPressure analogRead(FSR_PIN)) >= this -> ap_th.pressureTH) {
         ret |= PRESSURE_ALERT;
         this -> ap_node.lastAlert |= PRESSURE_ALERT;
     } else {
