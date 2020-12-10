@@ -101,7 +101,7 @@
 #define NOISE_TH_N      50
 #define SMOKE_TH_N      100
 #define GAS_TH_N        60
-#define LIGHT_TH_N      80
+#define LIGHT_TH_N      255
 #define PRESSURE_TH_N   80
 //Night float
 #define TEMP_TH_N       18
