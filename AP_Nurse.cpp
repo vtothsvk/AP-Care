@@ -7,7 +7,9 @@ PCF8591 extender(0, false);
 AP_Nurse::AP_Nurse(){
     //I/O init
     #ifdef PIR_ENABLE
-    pinMode(PIR_PIN, INPUT);
+        #ifndef DOOR
+        pinMode(PIR_PIN, INPUT);
+        #endif
     #endif
 
     #ifdef NOISE_ENABLE
