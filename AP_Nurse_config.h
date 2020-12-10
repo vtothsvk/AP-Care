@@ -9,8 +9,8 @@
  */
 //#define BED
 //#define DOOR
-#define HALLWAY
-//#define KITCHEN
+//#define HALLWAY
+#define KITCHEN
 
 /** Threshold and sensor enable directives 
  *
