@@ -10,7 +10,7 @@ before_install:
 install:
   - ln -s $PWD /usr/local/share/arduino/libraries/
   - arduino --pref "boardsmanager.additional.urls=https://dl.espressif.com/dl/package_esp32_index.json" --save-prefs
-  - arduino --install-boards esp32:esp32 --save-prefs
+  - arduino --install-boards esp32:esp32 --save-prefs 
   
   # install libs
   - wget -q https://github.com/m5stack/M5StickC/archive/0.2.0.tar.gz -O - | tar xvfz - -C ~/Arduino/libraries/
