@@ -1,6 +1,6 @@
 # AP-Care
 
-[![Build Status](https://travis-ci.com/vtothsvk/AP-Care.svg?branch=develop)](https://travis-ci.com/vtothsvk/AP-Home)
+[![Build Status](https://travis-ci.com/vtothsvk/newAuth.svg?token=odvLYX9ustQDL7maDo2D&branch=master)](https://travis-ci.com/github/vtothsvk/newAuth)
 
 Custom FW of the AP-Nurse Care node based on the ESP32 Arduino core. 
 
